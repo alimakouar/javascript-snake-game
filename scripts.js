@@ -1,6 +1,10 @@
 const can=document.getElementById("snakeGame");
 const can_ctxt=snakeGame.getContext("2d");
 
+var dx=11;
+var dy=11;
+var direction="none";
+
 can_ctxt.fillStyle="black"
 can_ctxt.fillRect(0,0,can.width,can.height)
 can.style.border="2px solid red";
@@ -40,4 +44,49 @@ function move_right(){
 
            };
        },100)
+}
+
+function move_left(){
+    l=setTimeout(function onTick()
+    {
+ if(direction!="right" && direction!="none" && !gameOver()){
+    const head ={x:snake[0].x - dx, y:snake[0].y};
+    snake.unshift(head);
+    snake.pop();
+    clear()
+    drawSnake(snake);
+
+    direction="left";
+    move_left();
+    };
+    },100);
+   
+}
+function move_up(){
+    u=setTimeout(function onTick()
+    {
+    if(direction!="down" && !gameOver()){
+    const head ={x:snake[0].x , y:snake[0].y -dy};
+    snake.unshift(head);
+    snake.pop();
+    clear()
+    drawSnake(snake);
+    direction="up";
+    move_up();
+    };
+},100);
+}
+function move_down(){
+    d=setTimeout(function onTick()
+    {
+    if(direction!="up" && !gameOver()){
+    const head ={x:snake[0].x , y:snake[0].y +dy};
+    snake.unshift(head);
+    snake.pop();
+    clear()
+    drawSnake(snake);
+    direction="down"
+    move_down();
+    };
+},100);
 }

@@ -1,9 +1,12 @@
 const can=document.getElementById("snakeGame");
 const can_ctxt=snakeGame.getContext("2d");
-
 var dx=11;
 var dy=11;
 var direction="none";
+const lk=37;
+const rk=39;
+const uk=38;
+const dk=40;
 
 var r;
 var u;
@@ -33,24 +36,36 @@ function main(){
     drawSnake(snake);
 }
 
+
+
+//pour redemarrer le jeu
+function restart(){
+    location.reload();
+}
+
+//pour effacer le tableau
+function clear(){
+    can_ctxt.fillStyle="black"
+    can_ctxt.fillRect(0,0,can.width,can.height)
+}
+
 //les fonction du deplacement
 function move_right(){  
 
-    r=setTimeout(function onTick()
-     {
-           if(direction!="left" && !gameOver()){
-           const head ={x:snake[0].x + dx, y:snake[0].y};
-           snake.unshift(head);
-           snake.pop();
-           clear()
-           drawSnake(snake);
-           direction="right"
-            move_right();
+         r=setTimeout(function onTick()
+          {
+                if(direction!="left" && !gameOver()){
+                const head ={x:snake[0].x + dx, y:snake[0].y};
+                snake.unshift(head);
+                snake.pop();
+                clear()
+                drawSnake(snake);
+                direction="right"
+                 move_right();
 
-           };
-       },100)
+                };
+            },100)
 }
-
 function move_left(){
     l=setTimeout(function onTick()
     {
@@ -96,6 +111,7 @@ function move_down(){
 },100);
 }
 
+
 //pour le deplacement du serpent a l'aide des touches
 window.addEventListener("keydown", function(event) {
     if (event.defaultPrevented) {
@@ -132,7 +148,7 @@ window.addEventListener("keydown", function(event) {
 
 });
 
-
+//une fonction qui detecte la fin du jeu
 function gameOver()
 {
     for(let i=4;i<snake.length;i++)
@@ -148,7 +164,6 @@ function gameOver()
 
         }
     }
-
     const hitLeftWall = snake[0].x < 0;
     const hitRightWall = snake[0].x > can.width - 10;
     const hitToptWall = snake[0].y < 0;
@@ -163,12 +178,9 @@ function gameOver()
 
         return true;
     }
+
 }
 
-//pour redemarrer le jeu
-function restart(){
-    location.reload();
-}
 
 $(document).ready(function(){
     $("#restart").on("click",restart);

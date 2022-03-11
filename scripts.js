@@ -23,3 +23,21 @@ function main(){
     var snake=[{x:400,y:300},{x:389,y:300},{x:378,y:300},{x:367,y:300},{x:356,y:300},{x:345,y:300}];
     drawSnake(snake);
 }
+
+//les fonction du deplacement
+function move_right(){  
+
+    r=setTimeout(function onTick()
+     {
+           if(direction!="left" && !gameOver()){
+           const head ={x:snake[0].x + dx, y:snake[0].y};
+           snake.unshift(head);
+           snake.pop();
+           clear()
+           drawSnake(snake);
+           direction="right"
+            move_right();
+
+           };
+       },100)
+}

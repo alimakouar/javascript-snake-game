@@ -164,3 +164,19 @@ function gameOver()
         return true;
     }
 }
+
+//pour redemarrer le jeu
+function restart(){
+    location.reload();
+}
+
+$(document).ready(function(){
+    $("#restart").on("click",restart);
+});
+
+//pour desactiver le scrolling de la page par les touches du clavier
+window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);

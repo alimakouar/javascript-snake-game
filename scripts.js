@@ -148,4 +148,19 @@ function gameOver()
 
         }
     }
+
+    const hitLeftWall = snake[0].x < 0;
+    const hitRightWall = snake[0].x > can.width - 10;
+    const hitToptWall = snake[0].y < 0;
+    const hitBottomWall = snake[0].y > can.height - 10;
+    if (hitLeftWall || hitRightWall || hitToptWall || hitBottomWall)
+    {
+        let res=window.confirm("Game over ! Do you want to play again ?");
+        if(res==true)
+        {
+            location.reload()
+        }
+
+        return true;
+    }
 }

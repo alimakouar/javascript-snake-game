@@ -5,6 +5,11 @@ var dx=11;
 var dy=11;
 var direction="none";
 
+var r;
+var u;
+var l;
+var d;
+
 can_ctxt.fillStyle="black"
 can_ctxt.fillRect(0,0,can.width,can.height)
 can.style.border="2px solid red";
@@ -90,3 +95,39 @@ function move_down(){
     };
 },100);
 }
+
+//pour le deplacement du serpent a l'aide des touches
+window.addEventListener("keydown", function(event) {
+    if (event.defaultPrevented) {
+      return;
+        }
+    if (event.code === "ArrowRight"){
+        if(direction!="left" && direction!="right"){
+        clearTimeout(u);
+        clearTimeout(l);
+        clearTimeout(d);
+        move_right();
+        }}
+    if (event.code === "ArrowLeft"){
+        if(direction!="right" && direction!="left"){
+        clearTimeout(r);
+        clearTimeout(u);
+        clearTimeout(d);
+        move_left();
+        }}
+    if (event.code === "ArrowDown"){
+        if(direction!="up" && direction!="down"){
+        clearTimeout(u);
+        clearTimeout(l);
+        clearTimeout(r);
+        move_down();
+        }}
+    if (event.code === "ArrowUp"){
+        if(direction!="down" && direction!="up"){
+        clearTimeout(l);
+        clearTimeout(r);
+        clearTimeout(d);
+        move_up();
+        }}
+
+});

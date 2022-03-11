@@ -131,3 +131,21 @@ window.addEventListener("keydown", function(event) {
         }}
 
 });
+
+
+function gameOver()
+{
+    for(let i=4;i<snake.length;i++)
+    {
+        const has_collied = snake[i].x === snake[0].x && snake[i].y === snake[0].y
+        if(has_collied){
+            let res=window.confirm("Game over ! Do you want to play again ?")
+            if(res==true)
+        {
+            location.reload()
+        }
+            return true;
+
+        }
+    }
+}
